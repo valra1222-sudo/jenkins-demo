@@ -28,4 +28,17 @@ pipeline {
             }
         }
     }
+
+    post {
+        success {
+            mail to: 'valra12.22@kmu.edu.ua',
+                 subject: "SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                 body: "Build succeeded.\nJob: ${env.JOB_NAME}\nBuild: #${env.BUILD_NUMBER}\nDetails: ${env.BUILD_URL}"
+        }
+        failure {
+            mail to: 'valra12.22@kmu.edu.ua',
+                 subject: "FAILURE: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                 body: "Build failed.\nJob: ${env.JOB_NAME}\nBuild: #${env.BUILD_NUMBER}\nDetails: ${env.BUILD_URL}"
+        }
+    }
 }
